@@ -39,7 +39,7 @@ dependencies:
   provider:
   intl:
   geolocator: #location detector
-  geocoding: #address conveter
+  geocoding: #address converter
   shared_preferences:
   google_fonts:
 

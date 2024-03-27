@@ -22,6 +22,12 @@ class _ParallaxBackgroundState extends State<ParallaxBackground> {
   double rowOp = 0.5;
 
   @override
+  void initState() {
+    super.initState();
+    startMovement();
+  }
+
+  @override
   void didChangeDependencies() {
     screenWidth = MediaQuery.of(context).size.width;
     super.didChangeDependencies();
@@ -41,12 +47,8 @@ class _ParallaxBackgroundState extends State<ParallaxBackground> {
               width: rowWidth,
               child: Opacity(
                 opacity: rowOp,
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return Row(
-                      children: images.map((e) => Expanded(child: Image.asset(e, height: 200,))).toList(),
-                    );
-                  },
+                child: Row(
+                  children: images.map((e) => Expanded(child: Image.asset(e, height: 200,))).toList(),
                 ),
               ),
             ),
@@ -55,12 +57,6 @@ class _ParallaxBackgroundState extends State<ParallaxBackground> {
       ),
     );
 
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    startMovement();
   }
 
   void startMovement() {
@@ -72,7 +68,7 @@ class _ParallaxBackgroundState extends State<ParallaxBackground> {
     });
     if(offset < -(rowWidth + screenWidth)) {
       rowOp = 0.0;
-      offset = screenWidth;
+      offset = 0;
     }
     Future.delayed(const Duration(milliseconds: 50), startMovement);
   }
